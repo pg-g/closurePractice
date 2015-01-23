@@ -72,7 +72,7 @@ var firstFn = function(secondFn) {
       secondFn();
       called = true;
     } else {
-      console.log('Stahp');
+      console.log('STAHHP');
     }
   }
 }
@@ -83,19 +83,41 @@ var second = firstFn(function(){
 
 second();
 
-//
+//Restrict run count: interpretation 1
 var firstFn = function(secondFn) {
   return function(nums) {
     for (var i = 0; i < nums + 1; i++) {
       if(i < nums){
         secondFn();
       } else {
-        console.log('Stahp');
+        console.log('STAHHP');
       }
     }
   }
 }
+
 var second = firstFn(function(){
   alert('Here');
 });
+
 second(5);
+
+//Restrict run count: interpretation 2
+var firstFn = function(secondFn, count) {
+  return function() {
+      if(count > 0){
+        secondFn();
+        count--;
+      } else {
+        console.log('STAHHP');
+      }
+  }
+}
+
+var second = firstFn(function(){
+  alert('Here');
+});
+
+var another = firstFn(second, 5);
+
+another();
