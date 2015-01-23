@@ -66,10 +66,36 @@ var makeCounter = function() {
   After the function has been called N number of times, console.log('STAHHP');
 */
 var firstFn = function(secondFn) {
+  var called = false;
   return function() {
-    secondFn();
+    if(called = false){
+      secondFn();
+      called = true;
+    } else {
+      console.log('Stahp');
+    }
   }
 }
 
+var second = firstFn(function(){
+  alert('Here');
+});
 
+second();
 
+//
+var firstFn = function(secondFn) {
+  return function(nums) {
+    for (var i = 0; i < nums + 1; i++) {
+      if(i < nums){
+        secondFn();
+      } else {
+        console.log('Stahp');
+      }
+    }
+  }
+}
+var second = firstFn(function(){
+  alert('Here');
+});
+second(5);
